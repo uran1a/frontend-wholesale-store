@@ -1,19 +1,31 @@
 import React from "react";
-
-import styles from "../../styles/Sidebar.module.css";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import styles from "../../styles/Sidebar.module.css";
+
+import { IRootState } from "../../features/store";
+import { Category } from "../../features/categories/categoriesReducer";
+
 const Sidebar = () => {
+    const list = useSelector((state: IRootState) => state.categories.list) as Category[];
+
+    const limitedList = list.slice(0, 10);
+
+    console.log("list", list);
+
     return (
         <section className={styles.sidebar}>
             <div className={styles.title}>CATEGORIES</div>
             <nav>
                 <ul className={styles.menu}>
-                    <li>
-                        <NavLink to={`/categories/${1}`}>
-                            Link
-                        </NavLink>
-                    </li>
+                    { limitedList.map(item => (
+                        <li key={item.id}>
+                            <NavLink to={`/categories/${item.id}`}>
+                                {item.name}
+                            </NavLink>
+                        </li>
+                    ))}
                 </ul>
             </nav>
 
