@@ -21,7 +21,9 @@ const Sidebar = () => {
                 <ul className={styles.menu}>
                     { limitedList.map(item => (
                         <li key={item.id}>
-                            <NavLink to={`/categories/${item.id}`}>
+                            <NavLink 
+                                className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ""}`}
+                                to={`/categories/${item.id}`}>
                                 {item.name}
                             </NavLink>
                         </li>

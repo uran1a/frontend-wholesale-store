@@ -6,7 +6,9 @@ import Footer from "../Footer/Footer";
 import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch } from "react-redux";
 import { AppDispatch, store } from "../../features/store";
-import { getCategories } from "../../features/categories/categoriesActionCreators";
+
+import { getCategories } from "../../features/categories/categoriesActions";
+import { getProducts } from "../../features/products/productsActions";
 
 const App = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -14,6 +16,7 @@ const App = () => {
     useEffect(() => {
         const clear = async () => {
             await store.dispatch(getCategories());
+            await store.dispatch(getProducts());
         };
         clear() 
     }, [dispatch]);

@@ -1,4 +1,4 @@
-import { Dispatch, createAsyncThunk } from "@reduxjs/toolkit";
+import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { BASE_URL } from "../../utils/constants";
