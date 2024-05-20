@@ -23,10 +23,10 @@ const Home = () => {
     return (
         <>
             <Poster />
-            <Products title="Trending" productes={state.products.list} amount={5} style={""} />
+            <Products title="Trending" products={state.products.list} amount={5} style={""} />
             <Categories title="Worth seeing" categories={state.categories.list} amount={5} style={""} />
             <Banner />
-            <Products title="Less then 100$" productes={state.products.filtered} amount={5} style={""} />
+            <Products title="Less then 100$" products={state.products.filtered} amount={5} style={""} />
         </>
     );
 };

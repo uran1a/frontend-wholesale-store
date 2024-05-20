@@ -15,17 +15,17 @@ import { categoriesFailure, categoriesStart, categoriesSuccess } from "./categor
 // });
 
 export const getCategories = () =>
-    async (dispath: Dispatch<any>): Promise<void> => {
+    async (dispatch: Dispatch<any>): Promise<void> => {
         try {
-            dispath(categoriesStart());
+            dispatch(categoriesStart());
 
             const res = await axios(`${BASE_URL}/categories`);
             
             console.log(res.data);
 
-            dispath(categoriesSuccess(res.data));
+            dispatch(categoriesSuccess(res.data));
         } catch (e: any) {
             console.log(e);
-            dispath(categoriesFailure(e.message));
+            dispatch(categoriesFailure(e.message));
         }
     }

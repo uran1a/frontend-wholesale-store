@@ -17,13 +17,13 @@ export interface Product {
 
 interface ProductsProps {
     title: string,
-    productes: Product[],
+    products: Product[],
     style: string,
     amount: number
 }
 
 const Products: React.FC<ProductsProps> = (props: ProductsProps) => {
-    const list = props.productes.filter((_, i) => i < props.amount);
+    const list = props.products.filter((_, i) => i < props.amount);
     
     return (
         <section className={styles.products}>
