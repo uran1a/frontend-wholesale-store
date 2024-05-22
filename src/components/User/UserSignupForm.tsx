@@ -2,9 +2,9 @@ import React, { ChangeEvent, useState } from 'react';
 
 import styles from '../../styles/User.module.css';
 
-import User from '../../types/User';
 import { createUser } from '../../features/user/userActions';
 import { store } from '../../features/store';
+import UserSignup from '../../types/UserSignup';
 
 interface UserSignupFormProps {
     closeForm: () => void;
@@ -12,7 +12,7 @@ interface UserSignupFormProps {
 }
 
 const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, closeForm }) => {
-    const [values, setValues] = useState<User>({
+    const [values, setValues] = useState<UserSignup>({
         name: "",
         email: "",
         password: "",

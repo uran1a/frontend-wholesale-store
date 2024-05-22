@@ -3,15 +3,16 @@ import axios from "axios";
 
 import { BASE_URL } from "../../utils/constants";
 
-import User from "../../types/User";
 import UserLogin from "../../types/UserLogin";
+import UserSignup from "../../types/UserSignup";
 
-import { createUserFailure, createUserStart, createUserSuccess, getProfileFailure, getProfileStart, getProfileSuccess, loginUserFailure, loginUserStart, loginUserSuccess } from "./userSlice";
+import { createUserFailure, createUserStart, createUserSuccess, getProfileFailure, getProfileStart, getProfileSuccess, loginUserFailure, loginUserStart, loginUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "./userSlice";
+import User from "../../types/User";
 
 
 
 export const createUser =
-  (data: User) =>
+  (data: UserSignup) =>
     async (dispatch: Dispatch<any>): Promise<void> => {
       try {
         dispatch(createUserStart())
@@ -21,8 +22,6 @@ export const createUser =
         console.log(res.data);
 
         dispatch(createUserSuccess(res.data))
-        //dispatch(getProfile())
-        
       } catch (e: any) {
         console.error(e)
 
@@ -45,8 +44,6 @@ export const getProfile =
         console.log(login.data);
 
         dispatch(getProfileSuccess(login.data))
-        //dispatch(getProfile())
-        
       } catch (e: any) {
         console.error(e)
 
@@ -70,5 +67,23 @@ export const loginUser =
         console.error(e)
 
         dispatch(loginUserFailure(e.message))
+      }
+    }
+
+export const updateUser =
+  (data: User) =>
+    async (dispatch: Dispatch<any>): Promise<void> => {
+      try {
+        dispatch(updateUserStart())
+
+        const res = await axios.put(`${BASE_URL}/users/${data.id}`, data);
+
+        console.log(res.data);
+
+        dispatch(updateUserSuccess(res.data))
+      } catch (e: any) {
+        console.error(e)
+
+        dispatch(updateUserFailure(e.message))
       }
     }

@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 import { UserState } from "../../types/UserState";
+import UserSignup from "../../types/UserSignup";
 import User from "../../types/User";
 
 
@@ -47,9 +48,9 @@ export const userSlice = createSlice({
             ...state,
             isLoading: true,
         }),
-        createUserSuccess: (state, action: PayloadAction<User>): UserState => ({
+        createUserSuccess: (state, action: PayloadAction<UserSignup>): UserState => ({
             ...state,
-            currentUser: action.payload,
+            //currentUser: action.payload,
             isLoading: false,
             error: null
         }),
@@ -79,13 +80,29 @@ export const userSlice = createSlice({
             ...state,
             isLoading: true,
         }),
-        getProfileSuccess: (state, action: PayloadAction<UserProfile>): UserState => ({
+        getProfileSuccess: (state, action: PayloadAction<User>): UserState => ({
             ...state,
             currentUser: action.payload,
             isLoading: false,
             error: null
         }),
         getProfileFailure: (state, action: PayloadAction<string>): UserState => ({
+            ...state,
+            isLoading: false,
+            error: action.payload,
+        }),
+
+        updateUserStart: (state): UserState => ({
+            ...state,
+            isLoading: true,
+        }),
+        updateUserSuccess: (state, action: PayloadAction<User>): UserState => ({
+            ...state,
+            currentUser: action.payload,
+            isLoading: false,
+            error: null
+        }),
+        updateUserFailure: (state, action: PayloadAction<string>): UserState => ({
             ...state,
             isLoading: false,
             error: action.payload,
@@ -97,6 +114,7 @@ export const userSlice = createSlice({
 export const { createUserStart, createUserSuccess, createUserFailure, 
     addItemToCart, toggleForm, toggleFormType,
     loginUserStart, loginUserSuccess, loginUserFailure,
-    getProfileStart, getProfileSuccess, getProfileFailure } = userSlice.actions;
+    getProfileStart, getProfileSuccess, getProfileFailure,
+    updateUserStart, updateUserSuccess, updateUserFailure } = userSlice.actions;
 
 export default userSlice.reducer;
