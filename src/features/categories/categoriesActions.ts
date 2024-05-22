@@ -2,7 +2,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { BASE_URL } from "../../utils/constants";
-import { categoriesFailure, categoriesStart, categoriesSuccess } from "./categoriesReducer";
+import { categoriesFailure, categoriesStart, categoriesSuccess } from "./categoriesSlice";
 
 // export const getCategories = createAsyncThunk<string[], void>('categories/getCategories', async (_, thunkAPI) => {
 //     try{

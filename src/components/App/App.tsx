@@ -9,6 +9,7 @@ import { AppDispatch, store } from "../../features/store";
 
 import { getCategories } from "../../features/categories/categoriesActions";
 import { getProducts } from "../../features/products/productsActions";
+import UserForm from "../User/UserForm";
 
 const App = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -24,6 +25,7 @@ const App = () => {
     return (
         <div className="app">
             <Header />
+            <UserForm />
             <div className="container">
                 <Sidebar />
                 <AppRoutes />

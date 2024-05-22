@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import styles from "../../styles/Categories.module.css";
-import { Category } from "../../features/categories/categoriesReducer";
+import { Category } from "../../features/categories/categoriesSlice";
 
 
 interface CategoriesProps {

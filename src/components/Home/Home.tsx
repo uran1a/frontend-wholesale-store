@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { filterByPrice } from "../../features/products/productsReducer";
+import { filterByPrice } from "../../features/products/productsSlice";
 import { IRootState } from "../../features/store";
 
 import Poster from "../Poster/Poster";

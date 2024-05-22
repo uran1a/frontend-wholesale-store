@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import { BASE_URL } from "../../utils/constants";
-import { Product } from "../products/productsReducer";
+import { Product } from "../products/productsSlice";
 
 
 /*  

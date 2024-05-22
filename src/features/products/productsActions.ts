@@ -2,7 +2,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { BASE_URL } from "../../utils/constants";
-import { productsFailure, productsStart, productsSuccess } from "./productsReducer";
+import { productsFailure, productsStart, productsSuccess } from "./productsSlice";
 
 export const getProducts = () =>
     async (dispatch: Dispatch<any>): Promise<void> => {

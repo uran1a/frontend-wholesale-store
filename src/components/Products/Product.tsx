@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import styles from '../../styles/Product.module.css';
 import { ROUTES } from '../../utils/routers';
-import { addItemToCart } from '../../features/user/userReducer';
-import { type Product } from '../../features/products/productsReducer';
+import { addItemToCart } from '../../features/user/userSlice';
+import type Product from '../../types/Product';
 
 const SIZES = [4, 4.5, 5];
 

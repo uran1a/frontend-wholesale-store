@@ -5,11 +5,9 @@ import { useGetProductQuery } from "../../features/api/apiSlice";
 import { ROUTES } from "../../utils/routers";
 import Product from "./Product";
 import { useDispatch, useSelector } from "react-redux";
-import { getRelatedProducts } from "../../features/products/productsReducer";
+import { getRelatedProducts } from "../../features/products/productsSlice";
 import Products from "./Products";
 import { IRootState } from "../../features/store";
-import { addListener } from "@reduxjs/toolkit";
-
 
 const SingleProduct: React.FC = () => {
     const dispatch = useDispatch();
@@ -34,7 +32,7 @@ const SingleProduct: React.FC = () => {
 
     useEffect(() => {
         if(!data || !products.list.length) return;
-        
+
         dispatch(getRelatedProducts(data.category.id));
     }, [data, dispatch, products.list.length]);
 
