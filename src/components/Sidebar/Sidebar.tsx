@@ -16,7 +16,7 @@ const Sidebar = () => {
 
     return (
         <section className={styles.sidebar}>
-            <div className={styles.title}>CATEGORIES</div>
+            <div className={styles.title}>Категории</div>
             <nav>
                 <ul className={styles.menu}>
                     { limitedList.map(item => (
@@ -33,10 +33,10 @@ const Sidebar = () => {
 
             <div className={styles.footer}>
                 <a href="/help" target="_blank" className={styles.link}>
-                    Help
+                    Помощь
                 </a>
                 <a href="/temps" target="_blank" className={styles.link} style={{textDecoration: "underline"}}>
-                    Terms & Conditions
+                    Правила & Условия
                 </a>
             </div>
         </section>

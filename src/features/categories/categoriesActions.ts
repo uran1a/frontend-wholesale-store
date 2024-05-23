@@ -1,25 +1,15 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { BASE_URL } from "../../utils/constants";
+import { API_URL } from "../../utils/constants";
 import { categoriesFailure, categoriesStart, categoriesSuccess } from "./categoriesSlice";
-
-// export const getCategories = createAsyncThunk<string[], void>('categories/getCategories', async (_, thunkAPI) => {
-//     try{
-//         const res = 
-//         return res.data;
-//     } catch(err) {
-//         console.log(err);
-//         return thunkAPI.rejectWithValue(err);
-//     }
-// });
 
 export const getCategories = () =>
     async (dispatch: Dispatch<any>): Promise<void> => {
         try {
             dispatch(categoriesStart());
 
-            const res = await axios(`${BASE_URL}/categories`);
+            const res = await axios(`${API_URL}/categories`);
             
             console.log(res.data);
 
