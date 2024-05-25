@@ -2,21 +2,21 @@ import React from "react";
 
 import styles from "../../styles/Home.module.css";
 
-import bannerImg from "../../images/banner.png";
-
 const Banner = () => (
     <section className={styles.banner}>
         <div className={styles.left}>
             <p className={styles.content}>
-                NEW YEAR
-                <span>SALE</span>
+                НОВЫЙ УЧЕБНЫЙ ГОД
+                <span>СКИДКИ</span>
             </p>
-            <button className={styles.more}>See more</button>
+            <button className={styles.more}>Смотреть больше</button>
         </div>
 
-        <div className={styles.right} style={{ backgroundImage: `url(${bannerImg})` }}>
+        <div className={styles.right}>
+            <div className={styles.overlay}></div>
+            <img src="https://img.xn--80ady2a0c.xn--p1ai/uploads/posts/2022-07/portfel.jpg"></img>
             <p className={styles.discount}>
-                save up to <span>50%</span> off
+                сэкономь <span>50%</span> на канцелярии
             </p>
         </div>
     </section>

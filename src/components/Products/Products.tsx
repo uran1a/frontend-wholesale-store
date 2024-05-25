@@ -2,18 +2,7 @@ import React from "react";
 
 import styles from "../../styles/Products.module.css";
 import { Link } from "react-router-dom";
-
-export interface Category {
-    name: string
-};
-
-export interface Product {
-    id: number,
-    images: string[],
-    title: string,
-    category: Category,
-    price: number
-}
+import Product from "../../types/Product";
 
 interface ProductsProps {
     title: string,

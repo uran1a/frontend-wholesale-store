@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { ROUTES } from "../../utils/routers";
+
+import Product from "./Product";
+import Products from "./Products";
 
 import { useGetProductQuery } from "../../features/api/apiSlice";
-import { ROUTES } from "../../utils/routers";
-import Product from "./Product";
-import { useDispatch, useSelector } from "react-redux";
 import { getRelatedProducts } from "../../features/products/productsSlice";
-import Products from "./Products";
 import { IRootState } from "../../features/store";
 
 const SingleProduct: React.FC = () => {
@@ -18,11 +20,10 @@ const SingleProduct: React.FC = () => {
     if (!id) {
         return <div>Invalid ID</div>;
     }
-    const numericId = parseInt(id, 10);
 
     const products = useSelector(({ products }: IRootState) => products);
 
-    const { data, isLoading, isFetching, isSuccess } = useGetProductQuery(numericId);
+    const { data, isLoading, isFetching, isSuccess } = useGetProductQuery(id);
 
     useEffect(() => {
         if(!isFetching && !isLoading && !isSuccess){

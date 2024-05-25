@@ -26,7 +26,7 @@ export const productsSlice = createSlice({
             ...state,
             filtered: state.list.filter((product: Product) => product.price < action.payload),
         }),
-        getRelatedProducts: (state, action: PayloadAction<number>): ProductsState => ({
+        getRelatedProducts: (state, action: PayloadAction<string>): ProductsState => ({
             ...state,
             related: state.list.filter((product: Product) => product.category.id === action.payload),
         }),

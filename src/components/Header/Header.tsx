@@ -10,14 +10,19 @@ import LOGO from "../../images/logo.png";
 import AVATAR from "../../images/avatar.jpg";
 import { IRootState } from "../../features/store";
 import { toggleForm } from "../../features/user/userSlice";
+import { useGetProductsQuery } from "../../features/api/apiSlice";
+import Product from "../../types/Product";
 
 const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [searchValue, setSearchValue] = useState("");
     const user = useSelector((state: IRootState) => state.user);
 
     const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
+
+    const { data, isLoading } = useGetProductsQuery({ title: searchValue });
 
     useEffect(() => {
         if(!user.currentUser) return;
@@ -28,6 +33,10 @@ const Header = () => {
     const handleClick = () => {
         if(!user.currentUser) dispatch(toggleForm(true));
         else navigate(ROUTES.PROFILE);
+    }
+
+    const handleSearch = ({ target: { value }}: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(value);
     }
 
     return (
@@ -54,14 +63,37 @@ const Header = () => {
                         <input 
                             type="search" 
                             name="search" 
-                            placeholder="Search for anything... "
+                            placeholder="Ищите что угодно..."
                             autoComplete="off"
-                            onChange={() => {}}
-                            value="" 
+                            onChange={handleSearch}
+                            value={searchValue} 
                         />
                     </div>
 
-                    { false && <div className={styles.box}></div> }
+                    { searchValue && (
+                        <div className={styles.box}>
+                            {isLoading ?
+                                "Loading"
+                                : !data?.length
+                                ? "No results"
+                                : data.map(({ id, title, images}: Product) => {
+                                    return (
+                                        <Link
+                                            key={id} 
+                                            className={styles.item} 
+                                            to={`/products/${id}`}
+                                            onClick={() => setSearchValue("")}
+                                        >
+                                            <div 
+                                                className={styles.image}
+                                                style={{ backgroundImage: `url(${images[0]})` }}
+                                            />
+                                            <div className="{styles.title">{title}</div>
+                                        </Link>
+                                    )
+                                })}                            
+                        </div> 
+                    )}
                 </form>
                 <div className={styles.account}>
                     <Link to={ROUTES.HOME} className={styles.favourites}>
