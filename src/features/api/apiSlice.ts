@@ -13,7 +13,7 @@ export const apiSlice = createApi({
             query: (id) => `/products/${id}`,
             providesTags: ["Product"],
         }),
-        getProducts: builder.query<Product[], { [key: string]: string }>({
+        getProducts: builder.query<Product[], SearchParams>({
             query: (params) => buildUrl("/products", params),
             providesTags: ["Product"],
         })

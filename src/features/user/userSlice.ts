@@ -36,6 +36,10 @@ export const userSlice = createSlice({
             state.cart = newCart;
         },
 
+        removeItemFromCart: (state, { payload }) => {
+            state.cart = state.cart.filter(({ id }) => id !== payload);
+        },
+
         toggleForm: (state, { payload }) => {
             state.showForm = payload;
         },
@@ -112,7 +116,8 @@ export const userSlice = createSlice({
 });
 
 export const { createUserStart, createUserSuccess, createUserFailure, 
-    addItemToCart, toggleForm, toggleFormType,
+    addItemToCart, removeItemFromCart,
+    toggleForm, toggleFormType,
     loginUserStart, loginUserSuccess, loginUserFailure,
     getProfileStart, getProfileSuccess, getProfileFailure,
     updateUserStart, updateUserSuccess, updateUserFailure } = userSlice.actions;

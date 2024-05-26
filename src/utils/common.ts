@@ -1,4 +1,4 @@
-export const buildUrl = (url: string, params: { [key: string]: string }) => {
+export const buildUrl = (url: string, params: SearchParams) => {
     let urlWithParams = url;
 
     Object.entries(params).forEach(([key, value], i) => {
@@ -6,5 +6,9 @@ export const buildUrl = (url: string, params: { [key: string]: string }) => {
         urlWithParams += `${sign}${key}=${value}`;
     });
 
+    console.log(urlWithParams);
+
     return urlWithParams;
 }
+
+export const sumBy = (arr: number[]) => arr.reduce((prev, cur) => prev + cur, 0);
