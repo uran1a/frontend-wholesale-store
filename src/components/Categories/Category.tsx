@@ -9,16 +9,15 @@ import Products from '../Products/Products';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import { IRootState } from '../../features/store';
 import SearchParams from '../../types/SearchParams';
+import type Category from '../../types/Category';
 
 
 const Category: React.FC = () => {
-    const { id } = useParams(); //!!!
+    const { id } = useParams();
 
     if(!id) {
         return <div>Error</div>
     }
-
-    const parsedId = parseInt(id) ?? 0;
 
     console.log(id);
 
@@ -30,7 +29,7 @@ const Category: React.FC = () => {
         title: "",
         price_min: 0,
         price_max: 0,
-        categoryId: parsedId,
+        categoryId: id,
     };
     const [params, setParams] = useState<SearchParams>(defaultParams);
 
@@ -43,15 +42,15 @@ const Category: React.FC = () => {
     const [values, setValues] = useState<{ [key: string]: string }>(defaultValues);
     
     useEffect(() => {
-        if(!parsedId) return;
+        if(!id) return;
         
-        setParams({ ...defaultParams, categoryId: parsedId });
+        setParams({ ...defaultParams, categoryId: id });
     }, [id]);
     
     useEffect(() => {
         if(!id || !list.length) return;
 
-        const category = list.find((item) => item.id === parsedId);
+        const category = list.find((item: Category) => item.id === id);
 
         setCat(category?.name!);
     }, [list, id])
@@ -68,9 +67,9 @@ const Category: React.FC = () => {
         const updatedParams = {
             ...params,
             title: values.title,
-            price_min: parseInt(values.price_min) || 0,
-            price_max: parseInt(values.price_max) || 0,
-            categoryId: parseInt(values.categoryId) || parsedId,
+            price_min: parseFloat(values.price_min) || 0,
+            price_max: parseFloat(values.price_max) || 0,
+            categoryId: values.categoryId || id,
         };
 
         setParams(updatedParams);
@@ -120,11 +119,11 @@ const Category: React.FC = () => {
             </form>
 
             {isLoading ? (
-                <div className="preloader">Loading...</div>
+                <div className="preloader">Загрузка...</div>
             ) : !isSuccess || !data?.length ? (
                 <div className={styles.back}>
-                    <span>No results</span>
-                    <button onClick={handleReset}>Reset</button>
+                    <span>Нет результата</span>
+                    <button onClick={handleReset}>Сбросить</button>
                 </div>
             ) : (
                 <Products title="" products={data} style="{{ padding: 0 }}" amount={data.length} />

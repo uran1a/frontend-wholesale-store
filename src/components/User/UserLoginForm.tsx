@@ -52,14 +52,14 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, cl
             </div>
 
             <div className={styles.title}>
-                Log In
+                Вход
             </div>
 
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.group}>
                     <input 
                         type="email" 
-                        placeholder="Your email" 
+                        placeholder="Ваша элект. почта" 
                         name="email" 
                         value={values.email} 
                         autoComplete="off" 
@@ -70,7 +70,7 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, cl
                 <div className={styles.group}>
                     <input 
                         type="password" 
-                        placeholder="Your password" 
+                        placeholder="Пароль" 
                         name="password" 
                         value={values.password} 
                         autoComplete="off" 
@@ -80,11 +80,11 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, cl
                 </div>
 
                 <div className={styles.link} onClick={() => toggleCurrentFormType("signup")}>
-                    Create an account
+                    Создать аккаунт
                 </div>
 
                 <button type="submit" className={styles.submit}>
-                    Login
+                    Вход
                 </button>
             </form>
         </div>

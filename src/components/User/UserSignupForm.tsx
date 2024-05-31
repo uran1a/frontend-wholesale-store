@@ -46,14 +46,14 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
             </div>
 
             <div className={styles.title}>
-                Sign Up
+                Регистрация
             </div>
 
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.group}>
                     <input 
                         type="email" 
-                        placeholder="Your email" 
+                        placeholder="Ваша элект. почта" 
                         name="email" 
                         value={values.email} 
                         autoComplete="off" 
@@ -64,7 +64,7 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                 <div className={styles.group}>
                     <input 
                         type="name" 
-                        placeholder="Your name" 
+                        placeholder="Ваше имя" 
                         name="name" 
                         value={values.name} 
                         autoComplete="off" 
@@ -75,7 +75,7 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                 <div className={styles.group}>
                     <input 
                         type="password" 
-                        placeholder="Your password" 
+                        placeholder="Пароль" 
                         name="password" 
                         value={values.password} 
                         autoComplete="off" 
@@ -86,7 +86,7 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                 <div className={styles.group}>
                     <input 
                         type="avatar" 
-                        placeholder="Your avatar" 
+                        placeholder="Аваратка" 
                         name="avatar" 
                         value={values.avatar}
                         autoComplete="off" 
@@ -96,11 +96,11 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                 </div>
 
                 <div className={styles.link} onClick={() => toggleCurrentFormType("login")}>
-                    I already have an account
+                    У вас есть аккаунт
                 </div>
 
                 <button type="submit" className={styles.submit}>
-                    Create an account
+                    Создать аккаунт
                 </button>
             </form>
         </div>

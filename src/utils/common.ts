@@ -1,3 +1,5 @@
+import SearchParams from "../types/SearchParams";
+
 export const buildUrl = (url: string, params: SearchParams) => {
     let urlWithParams = url;
 

@@ -12,6 +12,7 @@ import { IRootState } from "../../features/store";
 import { toggleForm } from "../../features/user/userSlice";
 import { useGetProductsQuery } from "../../features/api/apiSlice";
 import Product from "../../types/Product";
+import SearchParams from "../../types/SearchParams";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -20,9 +21,16 @@ const Header = () => {
     const [searchValue, setSearchValue] = useState("");
     const { user } = useSelector((state: IRootState) => state);
 
-    const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
+    const [values, setValues] = useState({ name: "Гость", avatar: AVATAR });
 
-    const { data, isLoading } = useGetProductsQuery({ title: searchValue });
+    const params: SearchParams = {
+        title: searchValue,
+        price_min: 0,
+        price_max: 0,
+        categoryId: ""
+    }
+
+    const { data, isLoading } = useGetProductsQuery(params);
 
     useEffect(() => {
         if(!user.currentUser) return;
@@ -73,9 +81,9 @@ const Header = () => {
                     { searchValue && (
                         <div className={styles.box}>
                             {isLoading ?
-                                "Loading"
+                                "Загрузка"
                                 : !data?.length
-                                ? "No results"
+                                ? "Нет результата"
                                 : data.map(({ id, title, images}: Product) => {
                                     return (
                                         <Link

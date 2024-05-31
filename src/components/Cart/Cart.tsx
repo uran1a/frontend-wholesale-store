@@ -22,9 +22,9 @@ const Cart = () => {
 
     return (
         <section className={styles.cart}>
-            <h2 className={styles.title}>Your cart</h2>
+            <h2 className={styles.title}>Ваша корзина</h2>
             {!cart.length ? (
-                <div className={styles.empty}>Here is empty</div>
+                <div className={styles.empty}>Корзина пуста</div>
             ) : (
                 <>
                     <div className={styles.list}>
@@ -87,7 +87,7 @@ const Cart = () => {
                             </span>
                         </div>      
 
-                        <button className={styles.proceed}>Proceed to checkout</button>       
+                        <button className={styles.proceed}>Оформить заказ</button>       
                     </div>
                 </>
             )}
