@@ -1,12 +1,14 @@
 import React, { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import styles from '../../styles/User.module.css';
 
 import { getProfile, loginUser } from '../../features/user/userActions';
 import { store } from '../../features/store';
-import UserLogin from '../../types/UserLogin';
 import { IRootState } from "../../features/store";
-import { useSelector } from 'react-redux';
+
+import UserLogin from '../../types/UserLogin';
+import ProfileRequest from '../../types/ProfileRequest';
 
 interface UserLoginFormProps {
     closeForm: () => void;
@@ -36,10 +38,7 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, cl
         if(isEmpty) return; // проверка полей <p error>
 
         await store.dispatch(loginUser(values));
-
-        console.log(accessToken);
         
-        await store.dispatch(getProfile(accessToken));
         closeForm();
     } 
 

@@ -18,8 +18,8 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [searchValue, setSearchValue] = useState("");
-    const { user } = useSelector((state: IRootState) => state);
+    const [searchValue, setSearchValue] = useState<string>("");
+    const user = useSelector((state: IRootState) => state.user);
 
     const [values, setValues] = useState({ name: "Гость", avatar: AVATAR });
 
@@ -44,6 +44,7 @@ const Header = () => {
     }
 
     const handleSearch = ({ target: { value }}: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(value);
         setSearchValue(value);
     }
 

@@ -81,7 +81,7 @@ const Cart = () => {
 
                     <div className={styles.actions}>
                         <div className={styles.total}>
-                            TOTAL PRICE: {" "}
+                            ИТОГОВАЯ ЦЕНА: {" "}
                             <span>
                                 {sumBy(cart.map(({ quantity, price}) => quantity * price ))}$
                             </span>

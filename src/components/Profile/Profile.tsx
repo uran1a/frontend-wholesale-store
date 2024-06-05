@@ -7,6 +7,7 @@ import { IRootState, store } from '../../features/store';
 import { updateUser } from '../../features/user/userActions';
 
 import User from '../../types/User';
+import UpdateUser from '../../types/UpdateUser';
 
 const Profile = () => {
     const currentUser = useSelector(({ user }: IRootState) => user.currentUser);
@@ -17,7 +18,8 @@ const Profile = () => {
         email: "",
         password: "",
         avatar: "",
-        role: "",
+        phoneNumber: "",
+        address: "",
     });
 
     useEffect(() => {
@@ -41,17 +43,26 @@ const Profile = () => {
         if(isEmpty) 
             return; // проверка полей <p error>
 
-        await store.dispatch(updateUser(values));
+        var updatedUser: UpdateUser = {
+            email: values.email,
+            password: values.password,
+            name: values.name,
+            avatar: values.avatar,
+            phoneNumber: values.phoneNumber,
+            address: values.address,
+        }
+
+        await store.dispatch(updateUser(values.id, updatedUser));
     }
 
     return (
         <section className={styles.profile}>
-            {!currentUser ? <span>You need to log in</span> : (
+            {!currentUser ? <span>Вам нужно войти в аккаунт</span> : (
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.group}>
                         <input 
                             type="email" 
-                            placeholder="Your email" 
+                            placeholder="Ваша элек. почта" 
                             name="email" 
                             value={values.email} 
                             autoComplete="off" 
@@ -62,7 +73,7 @@ const Profile = () => {
                     <div className={styles.group}>
                         <input 
                             type="name" 
-                            placeholder="Your name" 
+                            placeholder="Ваше имя" 
                             name="name" 
                             value={values.name} 
                             autoComplete="off" 
@@ -73,7 +84,7 @@ const Profile = () => {
                     <div className={styles.group}>
                         <input 
                             type="password" 
-                            placeholder="Your password" 
+                            placeholder="Ваш пароль" 
                             name="password" 
                             value={values.password} 
                             autoComplete="off" 
@@ -84,7 +95,7 @@ const Profile = () => {
                     <div className={styles.group}>
                         <input 
                             type="avatar" 
-                            placeholder="Your avatar" 
+                            placeholder="Ваша аватарка" 
                             name="avatar" 
                             value={values.avatar}
                             autoComplete="off" 
@@ -92,9 +103,31 @@ const Profile = () => {
                             required
                         />
                     </div>
+                    <div className={styles.group}>
+                        <input 
+                            type="phoneNumber" 
+                            placeholder="Ваш моб. телефон" 
+                            name="phoneNumber" 
+                            value={values.phoneNumber}
+                            autoComplete="off" 
+                            onChange={handleChange} 
+                            required
+                        />
+                    </div>
+                    <div className={styles.group}>
+                        <input 
+                            type="address" 
+                            placeholder="Ваш адрес" 
+                            name="address" 
+                            value={values.address}
+                            autoComplete="off" 
+                            onChange={handleChange} 
+                            required
+                        />
+                    </div>
                     
                     <button type="submit" className={styles.submit}>
-                        Update
+                        Изменить
                     </button>
              </form>
             )}

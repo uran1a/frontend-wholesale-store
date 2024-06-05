@@ -52,9 +52,9 @@ export const userSlice = createSlice({
             ...state,
             isLoading: true,
         }),
-        createUserSuccess: (state, action: PayloadAction<UserSignup>): UserState => ({
+        createUserSuccess: (state, action: PayloadAction<User>): UserState => ({
             ...state,
-            //currentUser: action.payload,
+            currentUser: action.payload,
             isLoading: false,
             error: null
         }),
@@ -68,9 +68,9 @@ export const userSlice = createSlice({
             ...state,
             isLoading: true,
         }),
-        loginUserSuccess: (state, action: PayloadAction<string>): UserState => ({
+        loginUserSuccess: (state, action: PayloadAction<User>): UserState => ({
             ...state,
-            accessToken: action.payload,
+            currentUser: action.payload,
             isLoading: false,
             error: null
         }),

@@ -55,37 +55,18 @@ const Product: React.FC<ProductProps> = ({ item }) => {
                 <div className={styles.price}>
                     {price}$
                 </div>
-                <div className={styles.color}>
-                    <span>Color:</span> Green
-                </div>
-                <div className={styles.sizes}>
-                    <span>Sizes:</span>
-
-                    <div className={styles.list}>
-                        {SIZES.map((size) => (
-                            <div
-                                onClick={() => setcurrentSize(size)}
-                                className={`${styles.size} ${
-                                    currentSize === size ? styles.active : ""
-                                }`}
-                                key={size}>
-                                {size}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
+            
                 <p className={styles.description}>{description}</p>
 
                 <div className={styles.actions}>
-                    <button onClick={addToCart} className={styles.add} disabled={!currentSize}>Add to cart</button>
-                    <button className={styles.favourite}>Add to favourites</button>
+                    <button onClick={addToCart} className={styles.add} >В корзину</button>
+                    <button className={styles.favourite}>В избранное</button>
                 </div>
 
                 <div className={styles.bottom}>
-                    <div className={styles.purchase}>19 people purchased</div>
+                    <div className={styles.purchase}>19 человек купили</div>
 
-                    <Link to={ROUTES.HOME}>Return to store</Link>
+                    <Link to={ROUTES.HOME}>Вернуться на главное</Link>
                 </div>
             </div>
         </section>

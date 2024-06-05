@@ -17,6 +17,8 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
         email: "",
         password: "",
         avatar: "",
+        phoneNumber: "",
+        address: "",
     });
 
     const handleChange = ({ target: { value, name } }: ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +91,30 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                         placeholder="Аваратка" 
                         name="avatar" 
                         value={values.avatar}
+                        autoComplete="off" 
+                        onChange={handleChange} 
+                        required
+                    />
+                </div>
+
+                <div className={styles.group}>
+                    <input 
+                        type="phoneNumber" 
+                        placeholder="Моб. телефон" 
+                        name="phoneNumber" 
+                        value={values.phoneNumber}
+                        autoComplete="off" 
+                        onChange={handleChange} 
+                        required
+                    />
+                </div>
+
+                <div className={styles.group}>
+                    <input 
+                        type="address" 
+                        placeholder="Адрес доставки" 
+                        name="address" 
+                        value={values.address}
                         autoComplete="off" 
                         onChange={handleChange} 
                         required

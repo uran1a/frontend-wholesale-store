@@ -3,8 +3,9 @@ interface User {
     email: string;
     password: string;
     name: string;
-    role: string;
     avatar: string;
+    phoneNumber: string;
+    address: string;
 }
 
 export default User;

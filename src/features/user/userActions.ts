@@ -1,13 +1,15 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { BASE_URL } from "../../utils/constants";
+import { API_URL } from "../../utils/constants";
 
 import UserLogin from "../../types/UserLogin";
 import UserSignup from "../../types/UserSignup";
 
 import { createUserFailure, createUserStart, createUserSuccess, getProfileFailure, getProfileStart, getProfileSuccess, loginUserFailure, loginUserStart, loginUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "./userSlice";
 import User from "../../types/User";
+import ProfileRequest from "../../types/ProfileRequest";
+import UpdateUser from "../../types/UpdateUser";
 
 
 
@@ -16,8 +18,10 @@ export const createUser =
     async (dispatch: Dispatch<any>): Promise<void> => {
       try {
         dispatch(createUserStart())
+        
+        console.log(data);
 
-        const res = await axios.post(`${BASE_URL}/users`, data);
+        const res = await axios.post(`${API_URL}/auth`, data);
 
         console.log(res.data);
 
@@ -29,40 +33,17 @@ export const createUser =
       }
     }
 
-export const getProfile =
-  (access_token: string) =>
-    async (dispatch: Dispatch<any>): Promise<void> => {
-      try {
-        dispatch(getProfileStart())
-
-        const login = await axios(`${BASE_URL}/auth/profile`, {
-          headers: {
-            "Authorization": `Bearer ${access_token}`,
-          }
-        });
-
-        console.log(login.data);
-
-        dispatch(getProfileSuccess(login.data))
-      } catch (e: any) {
-        console.error(e)
-
-        dispatch(getProfileFailure(e.message))
-      }
-    }
-
 export const loginUser =
   (data: UserLogin) =>
     async (dispatch: Dispatch<any>): Promise<void> => {
       try {
         dispatch(loginUserStart())
 
-        const res = await axios.post(`${BASE_URL}/auth/login`, data);
+        const res = await axios.post(`${API_URL}/auth/login`, data);
 
-        console.log(res.data.access_token);
+        console.log(res.data);
 
-        dispatch(loginUserSuccess(res.data.access_token))
-        
+        dispatch(loginUserSuccess(res.data))
       } catch (e: any) {
         console.error(e)
 
@@ -71,12 +52,12 @@ export const loginUser =
     }
 
 export const updateUser =
-  (data: User) =>
+  (id: number, data: UpdateUser) =>
     async (dispatch: Dispatch<any>): Promise<void> => {
       try {
         dispatch(updateUserStart())
 
-        const res = await axios.put(`${BASE_URL}/users/${data.id}`, data);
+        const res = await axios.put(`${API_URL}/auth/users/${id}`, data);
 
         console.log(res.data);
 
