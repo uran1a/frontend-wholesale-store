@@ -26,7 +26,7 @@ const Home = () => {
             <Products title="Канцтовары" products={state.products.list} amount={5} style={""} />
             <Categories title="Категории" categories={state.categories.list} amount={5} style={""} />
             <Banner />
-            <Products title="Меньше 100$" products={state.products.filtered} amount={5} style={""} />
+            <Products title="Меньше 100₽" products={state.products.filtered} amount={5} style={""} />
         </>
     );
 };
