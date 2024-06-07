@@ -1,14 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from '../../styles/User.module.css';
 
-import { getProfile, loginUser } from '../../features/user/userActions';
-import { store } from '../../features/store';
-import { IRootState } from "../../features/store";
+import { loginUser } from '../../features/user/userActions';
+import { IRootState, useAppDispatch } from '../../features/store';
 
 import UserLogin from '../../types/UserLogin';
-import ProfileRequest from '../../types/ProfileRequest';
+import ValidationErrors from '../ValidationErrors/ValidationErrors';
 
 interface UserLoginFormProps {
     closeForm: () => void;
@@ -16,12 +15,13 @@ interface UserLoginFormProps {
 }
 
 const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, closeForm }) => {
+    const { currentUser } = useSelector((state: IRootState) => state.user);
+    const dispatch = useAppDispatch();
+
     const [values, setValues] = useState<UserLogin>({
         email: "",
         password: "",
     });
-
-    const accessToken = useSelector(({ user } : IRootState) => user.accessToken);
 
     const handleChange = ({ target: { value, name } }: ChangeEvent<HTMLInputElement>) => {
         setValues(prevValues => ({
@@ -35,12 +35,19 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, cl
 
         const isEmpty = Object.values(values).some(val => !val);
         
-        if(isEmpty) return; // проверка полей <p error>
+        if(isEmpty)
+            return;
 
-        await store.dispatch(loginUser(values));
-        
-        closeForm();
+        await dispatch(loginUser(values));
     } 
+
+    useEffect(() => {
+        if (currentUser != null) {
+            closeForm();
+        } else {
+            console.log(currentUser);
+        }
+    }, [currentUser]);
 
     return (
         <div className={styles.wrapper}>
@@ -55,15 +62,15 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, cl
             </div>
 
             <form className={styles.form} onSubmit={handleSubmit}>
+                <ValidationErrors />
                 <div className={styles.group}>
                     <input 
-                        type="email" 
+                        type="text" 
                         placeholder="Ваша элект. почта" 
                         name="email" 
                         value={values.email} 
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
                 <div className={styles.group}>
@@ -74,7 +81,6 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ toggleCurrentFormType, cl
                         value={values.password} 
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
 

@@ -1,16 +1,21 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import styles from "../../styles/Cart.module.css";
 
-import { IRootState } from "../../features/store";
+import { IRootState, useAppDispatch } from "../../features/store";
 import { sumBy } from "../../utils/common";
-import { addItemToCart, removeItemFromCart } from "../../features/user/userSlice";
+import { addItemToCart, removeItemFromCart, toggleConfirmation } from "../../features/user/userSlice";
 import Product from "../../types/Product";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../utils/routers";
 
 const Cart = () => {
-    const dispatch = useDispatch();
-    const { cart } = useSelector(({ user }: IRootState) => user)
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const { cart } = useSelector(({ user }: IRootState) => user);
+    const user = useSelector((state: IRootState) => state.user);
 
     const changeQuantity = (item: Product, quantity: number) => { //проверку макс кол-во на складе
         dispatch(addItemToCart({ ...item, quantity }));
@@ -18,6 +23,16 @@ const Cart = () => {
 
     const handleRemoveItem = (id: string) => {
         dispatch(removeItemFromCart(id));
+    }
+
+    const handleClick = () => {
+        if(user.currentUser == null) {
+            navigate(ROUTES.HOME);
+            return;
+        }
+            
+        dispatch(toggleConfirmation(true));
+        navigate(ROUTES.ORDER_CONFIRMATION);
     }
 
     return (
@@ -63,7 +78,7 @@ const Cart = () => {
                                             </div>
                                         </div>
 
-                                        <div className={styles.total}>{price * quantity}$</div>
+                                        <div className={styles.total}>{price * quantity}₽</div>
 
                                         <div 
                                             className={styles.close}
@@ -83,11 +98,13 @@ const Cart = () => {
                         <div className={styles.total}>
                             ИТОГОВАЯ ЦЕНА: {" "}
                             <span>
-                                {sumBy(cart.map(({ quantity, price}) => quantity * price ))}$
+                                {sumBy(cart.map(({ quantity, price}) => quantity * price ))}₽
                             </span>
                         </div>      
 
-                        <button className={styles.proceed}>Оформить заказ</button>       
+                        <button className={styles.proceed} onClick={handleClick}>
+                            Оформить заказ
+                        </button>       
                     </div>
                 </>
             )}

@@ -7,6 +7,7 @@ import SingleProduct from "../Products/SingleProduct";
 import Profile from "../Profile/Profile";
 import SingleCategory from "../Categories/SingleCategory";
 import Cart from "../Cart/Cart";
+import OrderConfirmation from "../OrderConfirmation/OrderConfirmation";
 
 const AppRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.CATEGORY} element={<SingleCategory />} />
             <Route path={ROUTES.CART} element={<Cart />} />
+            <Route path={ROUTES.ORDER_CONFIRMATION} element={<OrderConfirmation />} />
         </Routes>
     )
 };

@@ -32,14 +32,14 @@ const Products: React.FC<ProductsProps> = (props: ProductsProps) => {
                                 <div className={styles.cat}>{product.category.name}</div>
                                 <div className={styles.info}>
                                     <div className={styles.prices}>
-                                        <div className={styles.price}>{product.price}$</div>
+                                        <div className={styles.price}>{product.price}₽</div>
                                         <div className={styles.oldPrice}>
-                                            {Math.floor(product.price * 0.8)}$
+                                            {Math.floor(product.price * 0.8)}₽
                                         </div>
                                     </div>
 
                                     <div className={styles.purchases}>
-                                        {Math.floor(Math.random() * 20 + 1)} purchased
+                                        Купили {Math.floor(Math.random() * 20 + 1)} шт.
                                     </div>
                                 </div>
                             </div>

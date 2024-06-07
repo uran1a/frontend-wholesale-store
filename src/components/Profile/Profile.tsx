@@ -8,6 +8,7 @@ import { updateUser } from '../../features/user/userActions';
 
 import User from '../../types/User';
 import UpdateUser from '../../types/UpdateUser';
+import ValidationErrors from '../ValidationErrors/ValidationErrors';
 
 const Profile = () => {
     const currentUser = useSelector(({ user }: IRootState) => user.currentUser);
@@ -59,6 +60,9 @@ const Profile = () => {
         <section className={styles.profile}>
             {!currentUser ? <span>Вам нужно войти в аккаунт</span> : (
                 <form className={styles.form} onSubmit={handleSubmit}>
+
+                    <ValidationErrors />
+                    
                     <div className={styles.group}>
                         <input 
                             type="email" 

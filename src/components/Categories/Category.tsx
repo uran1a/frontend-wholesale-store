@@ -102,7 +102,7 @@ const Category: React.FC = () => {
                         placeholder="0"
                         value={values.price_min}
                     />
-                    <span>Price from</span>
+                    <span>Цена От</span>
                 </div>
                 <div className={styles.filter}>
                     <input
@@ -112,7 +112,7 @@ const Category: React.FC = () => {
                         placeholder="0"
                         value={values.price_max}
                     />
-                    <span>Price to</span>
+                    <span>Цена До</span>
                 </div>
 
                 <button type="submit" hidden />

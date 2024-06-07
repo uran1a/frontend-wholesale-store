@@ -48,7 +48,7 @@ const SingleProduct: React.FC = () => {
     ) : (
         <>
             <Product item={data}></Product>
-            <Products products={products.related} amount={5} title="Related products" style={""} />
+            <Products products={products.related} amount={5} title="Рекомендуемые товары" style={""} />
         </>
     )
 };

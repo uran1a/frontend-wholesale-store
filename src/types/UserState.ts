@@ -1,5 +1,6 @@
 import Product from "./Product";
 import User from "./User";
+import ValidationError from "./ValidationError";
 
 export interface UserState {
     currentUser: User | null;
@@ -7,6 +8,7 @@ export interface UserState {
     cart: Product[];
     formType: string;
     showForm: boolean;
+    showConfirmation: boolean;
     isLoading: boolean;
-    error: string | null;
+    errors: ValidationError[] | null;
 }

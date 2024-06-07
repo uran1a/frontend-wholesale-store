@@ -7,8 +7,6 @@ import { ROUTES } from '../../utils/routers';
 import { addItemToCart } from '../../features/user/userSlice';
 import type Product from '../../types/Product';
 
-const SIZES = [4, 4.5, 5];
-
 interface ProductProps {
     item: Product,
 }
@@ -19,7 +17,6 @@ const Product: React.FC<ProductProps> = ({ item }) => {
     const dispatch = useDispatch();
 
     const [currentImage, setCurrentImage] = useState<string | undefined>(undefined);
-    const [currentSize, setcurrentSize] = useState<number | undefined>(undefined);
 
     useEffect(() => {
         if(!images.length) return;
@@ -53,7 +50,7 @@ const Product: React.FC<ProductProps> = ({ item }) => {
             <div className={styles.info}>
                 <h1 className={styles.title}>{title}</h1>
                 <div className={styles.price}>
-                    {price}$
+                    {price}₽
                 </div>
             
                 <p className={styles.description}>{description}</p>

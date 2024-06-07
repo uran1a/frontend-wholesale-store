@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import styles from "../../styles/Sidebar.module.css";
 
 import { IRootState } from "../../features/store";
-import { Category } from "../../features/categories/categoriesSlice";
+import Category from "../../types/Category";
 
 const Sidebar = () => {
     const list = useSelector((state: IRootState) => state.categories.list) as Category[];

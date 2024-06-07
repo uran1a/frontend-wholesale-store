@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 import { UserState } from "../../types/UserState";
-import UserSignup from "../../types/UserSignup";
 import User from "../../types/User";
+import ValidationError from "../../types/ValidationError";
 
 
 const initialState: UserState = {
@@ -11,8 +11,9 @@ const initialState: UserState = {
     cart: [],
     formType: "signup",
     showForm: false,
+    showConfirmation: false,
     isLoading: false,
-    error: null,
+    errors: null,
 };
 
 export const userSlice = createSlice({
@@ -40,12 +41,22 @@ export const userSlice = createSlice({
             state.cart = state.cart.filter(({ id }) => id !== payload);
         },
 
+        clearCart: (state) => {
+            state.cart = [];
+        },
+
         toggleForm: (state, { payload }) => {
             state.showForm = payload;
+            state.errors = null;
+        },
+
+        toggleConfirmation: (state, { payload }) => {
+            state.showConfirmation = payload;
         },
 
         toggleFormType: (state, { payload }) => {
             state.formType = payload;
+            state.errors = null;
         },
 
         createUserStart: (state): UserState => ({
@@ -56,12 +67,12 @@ export const userSlice = createSlice({
             ...state,
             currentUser: action.payload,
             isLoading: false,
-            error: null
+            errors: null
         }),
-        createUserFailure: (state, action: PayloadAction<string>): UserState => ({
+        createUserFailure: (state, action: PayloadAction<ValidationError[]>): UserState => ({
             ...state,
             isLoading: false,
-            error: action.payload,
+            errors: action.payload,
         }),
 
         loginUserStart: (state): UserState => ({
@@ -72,12 +83,12 @@ export const userSlice = createSlice({
             ...state,
             currentUser: action.payload,
             isLoading: false,
-            error: null
+            errors: null
         }),
-        loginUserFailure: (state, action: PayloadAction<string>): UserState => ({
+        loginUserFailure: (state, action: PayloadAction<ValidationError[]>): UserState => ({
             ...state,
             isLoading: false,
-            error: action.payload,
+            errors: action.payload,
         }),
 
         getProfileStart: (state): UserState => ({
@@ -88,12 +99,12 @@ export const userSlice = createSlice({
             ...state,
             currentUser: action.payload,
             isLoading: false,
-            error: null
+            errors: null
         }),
-        getProfileFailure: (state, action: PayloadAction<string>): UserState => ({
+        getProfileFailure: (state, action: PayloadAction<ValidationError[]>): UserState => ({
             ...state,
             isLoading: false,
-            error: action.payload,
+            errors: action.payload,
         }),
 
         updateUserStart: (state): UserState => ({
@@ -104,20 +115,20 @@ export const userSlice = createSlice({
             ...state,
             currentUser: action.payload,
             isLoading: false,
-            error: null
+            errors: null
         }),
-        updateUserFailure: (state, action: PayloadAction<string>): UserState => ({
+        updateUserFailure: (state, action: PayloadAction<ValidationError[]>): UserState => ({
             ...state,
             isLoading: false,
-            error: action.payload,
+            errors: action.payload,
         }),
      
     }
 });
 
 export const { createUserStart, createUserSuccess, createUserFailure, 
-    addItemToCart, removeItemFromCart,
-    toggleForm, toggleFormType,
+    addItemToCart, removeItemFromCart, clearCart,
+    toggleForm, toggleFormType, toggleConfirmation,
     loginUserStart, loginUserSuccess, loginUserFailure,
     getProfileStart, getProfileSuccess, getProfileFailure,
     updateUserStart, updateUserSuccess, updateUserFailure } = userSlice.actions;

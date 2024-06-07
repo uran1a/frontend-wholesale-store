@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import styles from '../../styles/User.module.css';
 
 import { createUser } from '../../features/user/userActions';
-import { store } from '../../features/store';
+import { IRootState, store, useAppDispatch } from '../../features/store';
 import UserSignup from '../../types/UserSignup';
+import ValidationErrors from '../ValidationErrors/ValidationErrors';
+import { useSelector } from 'react-redux';
 
 interface UserSignupFormProps {
     closeForm: () => void;
@@ -12,6 +14,9 @@ interface UserSignupFormProps {
 }
 
 const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, closeForm }) => {
+    const { currentUser } = useSelector((state: IRootState) => state.user);
+    const dispatch = useAppDispatch();
+
     const [values, setValues] = useState<UserSignup>({
         name: "",
         email: "",
@@ -35,9 +40,16 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
         
         if(isEmpty) return; // проверка полей <p error>
 
-        await store.dispatch(createUser(values));
-        closeForm();
+        await dispatch(createUser(values));
     }
+
+    useEffect(() => {
+        if (currentUser != null) {
+            closeForm();
+        } else {
+            console.log(currentUser);
+        }
+    }, [currentUser]);
 
     return (
         <div className={styles.wrapper}>
@@ -52,15 +64,17 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
             </div>
 
             <form className={styles.form} onSubmit={handleSubmit}>
+
+                <ValidationErrors />
+
                 <div className={styles.group}>
                     <input 
-                        type="email" 
+                        type="text" 
                         placeholder="Ваша элект. почта" 
                         name="email" 
                         value={values.email} 
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
                 <div className={styles.group}>
@@ -71,7 +85,6 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                         value={values.name} 
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
                 <div className={styles.group}>
@@ -82,7 +95,6 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                         value={values.password} 
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
                 <div className={styles.group}>
@@ -93,7 +105,6 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                         value={values.avatar}
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
 
@@ -105,7 +116,6 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                         value={values.phoneNumber}
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
 
@@ -117,7 +127,6 @@ const UserSignupForm: React.FC<UserSignupFormProps> = ({ toggleCurrentFormType, 
                         value={values.address}
                         autoComplete="off" 
                         onChange={handleChange} 
-                        required
                     />
                 </div>
 

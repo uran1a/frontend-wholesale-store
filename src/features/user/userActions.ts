@@ -27,9 +27,7 @@ export const createUser =
 
         dispatch(createUserSuccess(res.data))
       } catch (e: any) {
-        console.error(e)
-
-        dispatch(createUserFailure(e.message))
+        dispatch(createUserFailure(e.response.data.fieldErrors))
       }
     }
 
@@ -45,9 +43,7 @@ export const loginUser =
 
         dispatch(loginUserSuccess(res.data))
       } catch (e: any) {
-        console.error(e)
-
-        dispatch(loginUserFailure(e.message))
+        dispatch(loginUserFailure(e.response.data.fieldErrors));
       }
     }
 
@@ -63,8 +59,6 @@ export const updateUser =
 
         dispatch(updateUserSuccess(res.data))
       } catch (e: any) {
-        console.error(e)
-
-        dispatch(updateUserFailure(e.message))
+        dispatch(updateUserFailure(e.response.data.fieldErrors))
       }
     }
